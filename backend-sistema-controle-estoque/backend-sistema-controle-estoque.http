@@ -1,0 +1,6 @@
+@backend_sistema_controle_estoque_HostAddress = http://localhost:5131
+
+GET {{backend_sistema_controle_estoque_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

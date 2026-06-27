@@ -4,7 +4,8 @@ namespace backend_sistema_controle_estoque.Models;
 
 public class Usuario : IdentityUser
 {
-    public string Nome { get; private set; }
+
+    public ICollection<MovimentacaoEstoque> Movimentacoes { get; private set; } = new List<MovimentacaoEstoque>();
 
     public Usuario()
     {

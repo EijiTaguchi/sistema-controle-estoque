@@ -12,7 +12,7 @@ public class MovimentacaoEstoque
 {
     public int Id { get; private set; }
     public int ProdutoId { get; private set; }
-    public int UsuarioId { get; private set; }
+    public string UsuarioId { get; private set; }
     public TipoMovimentacao TipoMovimentacao { get; private set; }
     public int Quantidade { get; private set; }
     public DateTime DataHora { get; private set; } = DateTime.UtcNow;
@@ -26,13 +26,13 @@ public class MovimentacaoEstoque
 
     }
 
-    public MovimentacaoEstoque(TipoMovimentacao tipo, int quantidade, int produtoId, int usuarioId)
+    public MovimentacaoEstoque(TipoMovimentacao tipo, int quantidade, int produtoId, string usuarioId)
     {
 
         if (produtoId <= 0)
             throw new ArgumentException("O produto deve conter um id");
 
-        if (usuarioId <= 0)
+        if (string.IsNullOrWhiteSpace(usuarioId))
             throw new ArgumentException("O usuario deve conter um id");
 
         if (quantidade <= 0)

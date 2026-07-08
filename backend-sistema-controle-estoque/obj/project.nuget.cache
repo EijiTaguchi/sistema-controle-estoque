@@ -55,5 +55,18 @@
     "C:\\Users\\Eiji\\.nuget\\packages\\system.security.cryptography.pkcs\\9.0.4\\system.security.cryptography.pkcs.9.0.4.nupkg.sha512",
     "C:\\Users\\Eiji\\.nuget\\packages\\system.security.cryptography.protecteddata\\9.0.4\\system.security.cryptography.protecteddata.9.0.4.nupkg.sha512"
   ],
-  "logs": []
+  "logs": [
+    {
+      "code": "NU1903",
+      "level": "Warning",
+      "message": "Package 'Microsoft.OpenApi' 2.0.0 has a known high severity vulnerability, https://github.com/advisories/GHSA-v5pm-xwqc-g5wc",
+      "projectPath": "C:\\Users\\Eiji\\codeLearning\\Meus Projetinhos\\sistema-controle-estoque\\sistema-controle-estoque\\backend-sistema-controle-estoque\\backend-sistema-controle-estoque.csproj",
+      "warningLevel": 1,
+      "filePath": "C:\\Users\\Eiji\\codeLearning\\Meus Projetinhos\\sistema-controle-estoque\\sistema-controle-estoque\\backend-sistema-controle-estoque\\backend-sistema-controle-estoque.csproj",
+      "libraryId": "Microsoft.OpenApi",
+      "targetGraphs": [
+        "net10.0"
+      ]
+    }
+  ]
 }

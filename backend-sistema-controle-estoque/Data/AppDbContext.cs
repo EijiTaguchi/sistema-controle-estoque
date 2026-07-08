@@ -10,9 +10,9 @@ public class AppDbContext : IdentityDbContext<Usuario>
     {
     }
 
-    DbSet<Produto> Produtos { get; set; }
-    DbSet<Fornecedor> Fornecedores { get; set; }
-    DbSet<MovimentacaoEstoque> Movimentacoes { get; set; }
+    DbSet<Produto> Produtos { get; set; } = null!;
+    DbSet<Fornecedor> Fornecedores { get; set; } = null!;
+    DbSet<MovimentacaoEstoque> Movimentacoes { get; set; } = null!;
 
     protected override void OnModelCreating(ModelBuilder builder)
     {

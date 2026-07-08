@@ -1,4 +1,6 @@
-﻿namespace backend_sistema_controle_estoque.Models;
+﻿using Microsoft.AspNetCore.Http.HttpResults;
+
+namespace backend_sistema_controle_estoque.Models;
 
 public class Produto
 {
@@ -29,14 +31,16 @@ public class Produto
 
     private void ValidarProduto(string nome, string sku, decimal preco, int fornecedorId)
     {
-        if (string.IsNullOrWhiteSpace(nome))
-            throw new ArgumentException("O nome não pode ser vazio.");
-        if (string.IsNullOrWhiteSpace(sku))
-            throw new ArgumentException("O codigo sku não pode ser vazio.");
-        if (preco <= 0)
-            throw new ArgumentException("O preço não pode ser 0");
-        if (fornecedorId <= 0)
-            throw new ArgumentException("O Fornecedor deve ser declarado");
+
+            if (string.IsNullOrWhiteSpace(nome))
+                throw new ArgumentException("O nome não pode ser vazio.");
+            if (string.IsNullOrWhiteSpace(sku))
+                throw new ArgumentException("O codigo sku não pode ser vazio.");
+            if (preco <= 0)
+                throw new ArgumentException("O preço não pode ser 0");
+            if (fornecedorId <= 0)
+                throw new ArgumentException("O Fornecedor deve ser declarado");
+
     }
 
     public void Atualizar(string novoNome, decimal novoPreco, int novoFornecedor)

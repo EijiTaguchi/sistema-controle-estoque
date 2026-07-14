@@ -1,5 +1,9 @@
 using backend_sistema_controle_estoque.Data;
 using backend_sistema_controle_estoque.Models;
+using backend_sistema_controle_estoque.Repositories.Implementations;
+using backend_sistema_controle_estoque.Repositories.Interfaces;
+using backend_sistema_controle_estoque.Services.Implementations;
+using backend_sistema_controle_estoque.Services.Interfaces;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -17,6 +21,9 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 builder.Services.AddIdentity<Usuario, IdentityRole>()
     .AddEntityFrameworkStores<AppDbContext>()
     .AddDefaultTokenProviders();
+
+builder.Services.AddScoped<IProdutoRepository, ProdutoRepository>();
+builder.Services.AddScoped<IProdutoService, ProdutoService>();
 
 var app = builder.Build();
 

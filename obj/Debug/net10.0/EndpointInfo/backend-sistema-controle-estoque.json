@@ -1,0 +1,16 @@
+{
+  "openapi": "3.1.1",
+  "info": {
+    "title": "backend-sistema-controle-estoque | v1",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "https://localhost:7163"
+    },
+    {
+      "url": "http://localhost:5131"
+    }
+  ],
+  "paths": { }
+}

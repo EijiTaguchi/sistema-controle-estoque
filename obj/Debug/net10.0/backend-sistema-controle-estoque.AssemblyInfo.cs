@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("backend-sistema-controle-estoque")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+5dd8b9df9fe4344672721f4ed88f833ac6c2b6b5")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+79979c9910aac1d53a466aacae82488258f937c3")]
 [assembly: System.Reflection.AssemblyProductAttribute("backend-sistema-controle-estoque")]
 [assembly: System.Reflection.AssemblyTitleAttribute("backend-sistema-controle-estoque")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

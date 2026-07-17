@@ -158,3 +158,4 @@ C:\Users\Eiji\codeLearning\Meus Projetinhos\sistema-controle-estoque\sistema-con
 C:\Users\Eiji\codeLearning\Meus Projetinhos\sistema-controle-estoque\sistema-controle-estoque\backend-sistema-controle-estoque\obj\Debug\net10.0\backend-sistema-controle-estoque.genruntimeconfig.cache
 C:\Users\Eiji\codeLearning\Meus Projetinhos\sistema-controle-estoque\sistema-controle-estoque\backend-sistema-controle-estoque\obj\Debug\net10.0\ref\backend-sistema-controle-estoque.dll
 C:\Users\Eiji\codeLearning\Meus Projetinhos\sistema-controle-estoque\sistema-controle-estoque\backend-sistema-controle-estoque\obj\Debug\net10.0\staticwebassets.upToDateCheck.txt
+C:\Users\Eiji\codeLearning\Meus Projetinhos\sistema-controle-estoque\sistema-controle-estoque\backend-sistema-controle-estoque\obj\Debug\net10.0\backend-sistema-controle-estoque.sourcelink.json

@@ -25,6 +25,9 @@ builder.Services.AddIdentity<Usuario, IdentityRole>()
 builder.Services.AddScoped<IProdutoRepository, ProdutoRepository>();
 builder.Services.AddScoped<IProdutoService, ProdutoService>();
 
+builder.Services.AddScoped<IFornecedorRepository, FornecedorRepository>();
+builder.Services.AddScoped<IFornecedorService, FornecedorService>();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

@@ -14,31 +14,34 @@ public class FornecedorRepository : IFornecedorRepository
         _context = context;
     }
 
-    public async Task<Fornecedor> AdicionarAsync(Fornecedor fornecedor)
+    public async Task<IEnumerable<Fornecedor>> ObterTodosAsync()
     {
-        await _context.Fornecedores.AddAsync(fornecedor);
-        await _context.SaveChangesAsync();
-        return fornecedor;
-    }
-
-    public async Task<Fornecedor> AtualizarAsync(Fornecedor fornecedor)
-    {
-        await _context.SaveChangesAsync();
-        return fornecedor;
-    }
-
-    public async Task<Fornecedor?> ObterPorCnpjAsync(string cnpj)
-    {
-        return await _context.Fornecedores.FirstOrDefaultAsync(f => f.Cnpj == cnpj);
+        return await _context.Fornecedores
+            .AsNoTracking()
+            .ToListAsync();
     }
 
     public async Task<Fornecedor?> ObterPorIdAsync(int id)
     {
-        return await _context.Fornecedores.FindAsync(id);
+        return await _context.Fornecedores
+            .FirstOrDefaultAsync(f => f.Id == id);
     }
 
-    public async Task<IEnumerable<Fornecedor>> ObterTodosAsync()
+    public async Task<Fornecedor?> ObterPorCnpjAsync(string cnpj)
     {
-        return await _context.Fornecedores.ToListAsync();
+        return await _context.Fornecedores
+            .FirstOrDefaultAsync(f => f.Cnpj == cnpj);
+    }
+
+    public async Task AdicionarAsync(Fornecedor fornecedor)
+    {
+        await _context.Fornecedores.AddAsync(fornecedor);
+        await _context.SaveChangesAsync();
+    }
+
+    public async Task AtualizarAsync(Fornecedor fornecedor)
+    {
+        _context.Fornecedores.Update(fornecedor);
+        await _context.SaveChangesAsync();
     }
 }

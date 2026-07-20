@@ -90,4 +90,36 @@ public class ProdutoService : IProdutoService
             produtoExistente.FornecedorId
         );
     }
+
+    public async Task<IEnumerable<ProdutoDto>> ListarProdutoAsync()
+    {
+        var produtos = await _produtoRepository.ListarTodosAsync();
+
+        return produtos.Select(MapToProdutoDto);
+    }
+
+    public async Task<ProdutoDto> ObterProdutoPorIdAsync(int id)
+    {
+        var produto = await _produtoRepository.BuscarPorIdAsync(id);
+        if (produto == null)
+        {
+            throw new InvalidOperationException($"Produto com ID '{id}' não encontrado.");
+        }
+
+        return MapToProdutoDto(produto);
+    }
+
+    private static ProdutoDto MapToProdutoDto(Produto produto)
+    {
+        return new ProdutoDto
+        (
+            produto.Id,
+            produto.Nome,
+            produto.Sku,
+            produto.Preco,
+            produto.QuantidadeEmEstoque,
+            produto.Ativo,
+            produto.FornecedorId
+        );
+    }
 }

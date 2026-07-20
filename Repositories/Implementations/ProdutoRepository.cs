@@ -57,4 +57,11 @@ public class ProdutoRepository : IProdutoRepository
         await _context.SaveChangesAsync();
         return produto;
     }
+
+    public async Task<IEnumerable<Produto?>> ListarTodosAsync()
+    {
+        return await _context.Produtos
+            .Include(p => p.Fornecedor)
+            .ToListAsync();
+    }
 }

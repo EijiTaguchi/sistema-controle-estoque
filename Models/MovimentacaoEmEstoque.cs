@@ -44,5 +44,4 @@ public class MovimentacaoEstoque
         TipoMovimentacao = tipo;
     }
 
-
 }

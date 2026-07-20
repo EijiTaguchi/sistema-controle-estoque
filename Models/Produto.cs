@@ -62,4 +62,23 @@ public class Produto
         Ativo = false;
     }
 
+    public void EntradaEstoque(int quantidade)
+    {
+        if (quantidade <= 0)
+            throw new ArgumentException("A quantidade deve ser maior que zero.");
+
+        QuantidadeEmEstoque += quantidade;
+    }
+
+    public void SaidaEstoque(int quantidade)
+    {
+        if (quantidade <= 0)
+            throw new ArgumentException("A quantidade deve ser maior que zero.");
+
+        if (QuantidadeEmEstoque < quantidade)
+            throw new InvalidOperationException("Estoque insuficiente.");
+
+        QuantidadeEmEstoque -= quantidade;
+    }
+
 }

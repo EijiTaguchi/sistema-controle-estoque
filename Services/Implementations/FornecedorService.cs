@@ -86,6 +86,7 @@ public class FornecedorService : IFornecedorService
     private static FornecedorDto MapearParaDto(Fornecedor fornecedor)
     {
         return new FornecedorDto(
+            fornecedor.Id,
             fornecedor.Nome,
             fornecedor.Cnpj,
             fornecedor.Telefone,

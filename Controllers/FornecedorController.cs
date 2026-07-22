@@ -19,10 +19,7 @@ public class FornecedorController : ControllerBase
     public async Task<IActionResult> MostrarFornecedorId(int id)
     {
         var fornecedor = await _fornecedorService.ObterFornecedorPorIdAsync(id);
-        if (fornecedor == null)
-        {
-            return NotFound();
-        }
+
         return Ok(fornecedor);
     }
 
@@ -36,22 +33,14 @@ public class FornecedorController : ControllerBase
     [HttpPost]
     public async Task<IActionResult> CriarFornecedor([FromBody] CriarFornecedorDto fornecedor)
     {
-        if (fornecedor == null)
-        {
-            return BadRequest();
-        }
 
         var novoFornecedor = await _fornecedorService.CriarFornecedorAsync(fornecedor);
-        return CreatedAtAction(nameof(MostrarFornecedorId), new { cnpj = novoFornecedor.Cnpj }, novoFornecedor);
+        return CreatedAtAction(nameof(MostrarFornecedorId), new { id = novoFornecedor.Id }, novoFornecedor);
     }
 
     [HttpPut("{id}")]
     public async Task<IActionResult> AtualizarFornecedor(int id, [FromBody] AtualizarFornecedorDto fornecedor)
     {
-        if (fornecedor == null || id != fornecedor.id)
-        {
-            return BadRequest();
-        }
 
         var fornecedorAtualizado = await _fornecedorService.AtualizarFornecedorAsync(fornecedor);
         return Ok(fornecedorAtualizado);
@@ -62,10 +51,7 @@ public class FornecedorController : ControllerBase
     public async Task<IActionResult> DesativarFornecedor(int id)
     {
         var fornecedorDesativado = await _fornecedorService.DesativarFornecedorAsync(id);
-        if (fornecedorDesativado == null)
-        {
-            return NotFound();
-        }
+
         return Ok(fornecedorDesativado);
     }
 }

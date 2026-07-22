@@ -27,10 +27,6 @@ public class ProdutoController : ControllerBase
     public async Task<IActionResult> ObterProdutoPorId(int id)
     {
         var produto = await _produtoService.ObterProdutoPorIdAsync(id);
-        if (produto == null)
-        {
-            return NotFound();
-        }
 
         return Ok(produto);
     }
@@ -38,12 +34,12 @@ public class ProdutoController : ControllerBase
     [HttpPost]
     public async Task<IActionResult> CriarProduto([FromBody] CriarProdutoDto produto)
     {
-        if (produto == null)
-        {
-            return BadRequest();
-        }
+    
         var novoProduto = await _produtoService.CriarProdutoAsync(produto);
-        return CreatedAtAction(nameof(ListarProdutos), new { Id = novoProduto.Id }, novoProduto);
+        return CreatedAtAction(
+            nameof(ObterProdutoPorId),
+            new { id = novoProduto.Id },
+            novoProduto);
 
 
     }
@@ -51,10 +47,6 @@ public class ProdutoController : ControllerBase
     [HttpPut("{id}")]
     public async Task<IActionResult> AtualizarProduto(int id, [FromBody] AtualizarProdutoDto produto)
     {
-        if (produto == null || id != produto.id)
-        {
-            return BadRequest();
-        }
 
         var produtoAtualizado = await _produtoService.AtualizarProdutoAsync(produto);
         return Ok(produtoAtualizado);
@@ -64,10 +56,6 @@ public class ProdutoController : ControllerBase
     public async Task<IActionResult> DesativarProduto(int id)
     {
         var produtoDesativado = await _produtoService.DesativarProdutoAsync(id);
-        if (produtoDesativado == null)
-        {
-            return NotFound();
-        }
 
         return Ok(produtoDesativado);
     }

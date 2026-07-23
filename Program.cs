@@ -4,6 +4,7 @@ using backend_sistema_controle_estoque.Repositories.Implementations;
 using backend_sistema_controle_estoque.Repositories.Interfaces;
 using backend_sistema_controle_estoque.Services.Implementations;
 using backend_sistema_controle_estoque.Services.Interfaces;
+using backend_sistema_controle_estoque.Middlewares;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Scalar.AspNetCore;
@@ -33,6 +34,8 @@ builder.Services.AddScoped<IMovimentacaoRepository, MovimentacaoRepository>();
 builder.Services.AddScoped<IMovimentacaoService, MovimentacaoService>();
 
 var app = builder.Build();
+
+app.UseMiddleware<ExceptionMiddleware>();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())

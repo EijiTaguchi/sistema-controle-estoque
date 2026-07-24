@@ -1,4 +1,5 @@
 ﻿using backend_sistema_controle_estoque.Models;
+using System.ComponentModel.DataAnnotations;
 
 namespace backend_sistema_controle_estoque.Dtos.Movimentacao;
 

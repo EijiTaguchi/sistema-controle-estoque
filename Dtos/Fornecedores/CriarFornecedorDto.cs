@@ -9,6 +9,7 @@ public record CriarFornecedorDto(
     
     [Required(ErrorMessage = "O CNPJ do fornecedor é obrigatório.")]
     [StringLength(18, MinimumLength = 14, ErrorMessage = "O CNPJ deve possuir de 14 a 18 caracteres.")]
+    [RegularExpression(@"^\d{2}\.\d{3}\.\d{3}/\d{4}-\d{2}$", ErrorMessage = "O CNPJ informado é inválido.")]
     string Cnpj,
 
     [Phone(ErrorMessage = "O telefone informado é inválido.")]

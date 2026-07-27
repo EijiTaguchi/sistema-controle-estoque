@@ -15,13 +15,13 @@ public class ProdutoService : IProdutoService
 
     public async Task<ProdutoDto> AtualizarProdutoAsync(AtualizarProdutoDto dto)
     {
-        var produtoExistente = await _produtoRepository.BuscarPorIdAsync(dto.id);
+        var produtoExistente = await _produtoRepository.BuscarPorIdAsync(dto.Id);
         if (produtoExistente == null)
         {
-            throw new InvalidOperationException($"Produto com ID '{dto.id}' não encontrado.");
+            throw new InvalidOperationException($"Produto com ID '{dto.Id}' não encontrado.");
         }
 
-        produtoExistente.Atualizar(dto.nome, dto.preco, dto.fornecedorId);
+        produtoExistente.Atualizar(dto.Nome, dto.Preco , dto.FornecedorId);
 
         await _produtoRepository.AtualizarAsync(produtoExistente);  
 
@@ -39,19 +39,19 @@ public class ProdutoService : IProdutoService
 
     public async Task<ProdutoDto> CriarProdutoAsync(CriarProdutoDto dto)
     {
-        var skuExistente = await _produtoRepository.BuscarPorSkuAsync(dto.sku);
+        var skuExistente = await _produtoRepository.BuscarPorSkuAsync(dto.Sku);
         if (skuExistente != null)
         {
-            throw new InvalidOperationException($"Já existe um produto com o SKU '{dto.sku}'.");
+            throw new InvalidOperationException($"Já existe um produto com o SKU '{dto.Sku}'.");
         }
        
 
         var produto = new Produto
         (
-            dto.nome,
-            dto.sku,
-            dto.preco,
-            dto.fornecedorId);
+            dto.Nome,
+            dto.Sku,
+            dto.Preco,
+            dto.FornecedorId);
 
         await _produtoRepository.AdicionarAsync(produto);
 

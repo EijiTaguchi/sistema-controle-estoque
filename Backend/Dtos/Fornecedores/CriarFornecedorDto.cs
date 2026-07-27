@@ -12,7 +12,8 @@ public record CriarFornecedorDto(
     [RegularExpression(@"^\d{2}\.\d{3}\.\d{3}/\d{4}-\d{2}$", ErrorMessage = "O CNPJ informado é inválido.")]
     string Cnpj,
 
-    [Phone(ErrorMessage = "O telefone informado é inválido.")]
+    [Required(ErrorMessage = "O telefone informado é inválido.")]
+    [RegularExpression(@"^\(\d{2}\)\s\d{4,5}-\d{4}$", ErrorMessage = "Telefone inválido.")]
     string Telefone,
     [EmailAddress(ErrorMessage = "O email informado é inválido.")]
     string Email

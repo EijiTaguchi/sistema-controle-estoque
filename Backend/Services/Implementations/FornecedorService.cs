@@ -37,11 +37,21 @@ public class FornecedorService : IFornecedorService
         if (fornecedorExistente != null)
             throw new InvalidOperationException("Fornecedor já existe.");
 
+        var cnpj = dto.Cnpj
+            .Replace(".", "")
+            .Replace("/", "")
+            .Replace("-", "");
+
+        var telefone = dto.Telefone
+            .Replace("(", "")
+            .Replace(")", "")
+            .Replace("-", "");
+
         var fornecedor = new Fornecedor
         (
             dto.Nome,
-            dto.Cnpj,
-            dto.Telefone,
+            cnpj,
+            telefone,
             dto.Email
         );
 

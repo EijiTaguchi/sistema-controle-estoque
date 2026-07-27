@@ -15,14 +15,14 @@ public class Fornecedor
     
     }
 
-    public Fornecedor(string nome, string cnpj, string email, string telefone)
+    public Fornecedor(string nome, string cnpj, string telefone, string email)
     {
         ValidarFornecedor(nome, cnpj, email, telefone);
 
         Nome = nome.Trim();
         Cnpj = cnpj.Trim();
-        Email = email.Trim();
         Telefone = telefone.Trim();
+        Email = email.Trim();
     }
 
     private void ValidarFornecedor(string nome, string cnpj, string email, string telefone)

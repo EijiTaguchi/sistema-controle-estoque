@@ -15,6 +15,7 @@ public record CriarFornecedorDto(
     [Required(ErrorMessage = "O telefone informado é inválido.")]
     [RegularExpression(@"^\(\d{2}\)\s\d{4,5}-\d{4}$", ErrorMessage = "Telefone inválido.")]
     string Telefone,
+
     [EmailAddress(ErrorMessage = "O email informado é inválido.")]
     string Email
 );

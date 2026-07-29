@@ -23,7 +23,10 @@ public class FornecedorService : IFornecedorService
         if (fornecedorExistente == null )
             throw new InvalidOperationException("Fornecedor não encontrado.");
 
-        fornecedorExistente.Atualizar(dto.Nome, dto.Telefone, dto.Email);
+        fornecedorExistente.Atualizar(
+            novoNome: dto.Nome, 
+            novoEmail: dto.Email, 
+            novoTelefone: dto.Telefone);
 
         await _fornecedorRepository.AtualizarAsync(fornecedorExistente);
 

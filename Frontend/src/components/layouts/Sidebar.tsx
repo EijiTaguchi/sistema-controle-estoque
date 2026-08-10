@@ -1,4 +1,4 @@
-import { ArrowLeftRight, LayoutDashboard, LogOut, Package, Truck, User, User } from "lucide-react";
+import { ArrowLeftRight, LayoutDashboard, LogOut, Package, Truck, User } from "lucide-react";
 import { NavItem } from "./NavItem";
 import { Separator } from "../ui/separator";
 import { Button } from "../ui/button";

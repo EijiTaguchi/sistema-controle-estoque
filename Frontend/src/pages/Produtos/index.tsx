@@ -1,7 +1,13 @@
-function Produtos() {
-    return(
-        <h1>Produtos</h1>
-    )
-}
+import { PageContainer } from "../../components/layouts/PageContainer";
+import { PageHeader } from "../../components/layouts/PageHeader";
+import { Button } from "../../components/ui/button";
 
-export default Produtos
+export default function Produtos() {
+    return(
+            <PageContainer>
+                <PageHeader title="Produtos" description="Verifique os produtos do sistema">
+                    <Button>Adicionar Produto</Button>
+                </PageHeader>
+            </PageContainer>
+        )
+}

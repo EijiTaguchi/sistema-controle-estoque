@@ -2,8 +2,10 @@ import { ArrowLeftRight, LayoutDashboard, LogOut, Package, Truck, User } from "l
 import { NavItem } from "./NavItem";
 import { Separator } from "../ui/separator";
 import { Button } from "../ui/button";
+import { useAuth } from "../../contexts/AuthContext";
 
 export function Sidebar() {
+    const { logout } = useAuth();
     return (
         <aside className="flex h-screen w-64 flex-col border-r bg-background p-4">
             <h2 className="mb-8 text-xl font-bold">Estoque</h2>
@@ -47,8 +49,9 @@ export function Sidebar() {
         <Separator className="my-4" />
 
         <Button
-          variant="ghost"
-          className="w-full justify-start"
+            onClick={logout}
+            variant="ghost"
+            className="w-full justify-start"
         >
           <LogOut className="mr-2 h-4 w-4" />
           Sair

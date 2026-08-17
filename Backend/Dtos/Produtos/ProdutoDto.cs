@@ -7,5 +7,6 @@ public record ProdutoDto(
     decimal Preco,
     int QuantidadeEstoque,
     bool Ativo,
-    int FornecedorId
+    int FornecedorId,
+    string FornecedorNome
     );

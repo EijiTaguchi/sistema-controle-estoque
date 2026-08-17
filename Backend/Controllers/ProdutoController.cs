@@ -16,9 +16,13 @@ public class ProdutoController : ControllerBase
    }
 
     [HttpGet]
-    public async Task<IActionResult> ListarProdutos()
+    public async Task<IActionResult> ListarProdutos([FromQuery] string? busca, [FromQuery] int pagina = 1, [FromQuery] int tamanhoPagina = 10)
     {
-        var produtos = await _produtoService.ListarProdutoAsync();
+        var produtos = await _produtoService.ListarProdutosAsync(
+            busca,
+            pagina,
+            tamanhoPagina
+        );
 
         return Ok(produtos);
     }
@@ -41,11 +45,10 @@ public class ProdutoController : ControllerBase
             new { id = novoProduto.Id },
             novoProduto);
 
-
     }
 
     [HttpPut("{id}")]
-    public async Task<IActionResult> AtualizarProduto(int id, [FromBody] AtualizarProdutoDto produto)
+    public async Task<IActionResult> AtualizarProduto([FromBody] AtualizarProdutoDto produto)
     {
 
         var produtoAtualizado = await _produtoService.AtualizarProdutoAsync(produto);

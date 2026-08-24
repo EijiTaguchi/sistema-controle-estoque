@@ -8,6 +8,9 @@ import Perfil from "../pages/Perfil";
 import Produtos from "../pages/Produtos";
 import Register from "../pages/Register";
 import { ProtectedRoute } from "../components/auth/ProtectedRoute";
+import DetalhesProduto from "../pages/Produtos/Detalhes";
+import EditarProduto from "../pages/Produtos/Editar";
+import CriarProduto from "../pages/Produtos/Criar";
 
 
 export default function App() {
@@ -32,6 +35,21 @@ export default function App() {
             element={<Produtos />}
           />
 
+          <Route
+            path="/produtos/:id"
+            element={<DetalhesProduto />}
+          />
+
+          <Route
+            path="/produtos/:id/editar"
+            element={<EditarProduto />}
+          />
+
+          <Route
+            path="/produtos/novo"
+            element={<CriarProduto />}
+          />
+          
           <Route
             path="/fornecedores"
             element={<Fornecedores />}

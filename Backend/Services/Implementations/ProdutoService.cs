@@ -23,18 +23,9 @@ public class ProdutoService : IProdutoService
 
         produtoExistente.Atualizar(dto.Nome, dto.Preco , dto.FornecedorId);
 
-        await _produtoRepository.AtualizarAsync(produtoExistente);  
+        await _produtoRepository.AtualizarAsync(produtoExistente);
 
-        return new ProdutoDto
-        (
-            produtoExistente.Id,
-            produtoExistente.Nome,
-            produtoExistente.Sku,
-            produtoExistente.Preco,
-            produtoExistente.QuantidadeEmEstoque,
-            produtoExistente.Ativo,
-            produtoExistente.FornecedorId
-        );
+        return MapToProdutoDto(produtoExistente);
     }
 
     public async Task<ProdutoDto> CriarProdutoAsync(CriarProdutoDto dto)
@@ -55,16 +46,7 @@ public class ProdutoService : IProdutoService
 
         await _produtoRepository.AdicionarAsync(produto);
 
-        return new ProdutoDto
-        (
-            produto.Id,
-            produto.Nome,
-            produto.Sku,
-            produto.Preco,
-            produto.QuantidadeEmEstoque,
-            produto.Ativo,
-            produto.FornecedorId
-            );
+        return MapToProdutoDto(produto);
     }
 
     public async Task<ProdutoDto> DesativarProdutoAsync(int id)
@@ -79,23 +61,47 @@ public class ProdutoService : IProdutoService
 
         await _produtoRepository.DesativarAsync(produtoExistente);
 
-        return new ProdutoDto
-        (
-            produtoExistente.Id,
-            produtoExistente.Nome,
-            produtoExistente.Sku,
-            produtoExistente.Preco,
-            produtoExistente.QuantidadeEmEstoque,
-            produtoExistente.Ativo,
-            produtoExistente.FornecedorId
-        );
+        return MapToProdutoDto(produtoExistente);
     }
 
-    public async Task<IEnumerable<ProdutoDto>> ListarProdutoAsync()
+    public async Task<ProdutoPaginadoDto> ListarProdutosAsync(string? busca,int pagina,int tamanhoPagina)
     {
-        var produtos = await _produtoRepository.ListarTodosAsync();
+        if (pagina < 1)
+        {
+            pagina = 1;
+        }
 
-        return produtos.Select(MapToProdutoDto);
+        if (tamanhoPagina < 1)
+        {
+            tamanhoPagina = 10;
+        }
+
+        if (tamanhoPagina > 100)
+        {
+            tamanhoPagina = 100;
+        }
+
+        var resultado = await _produtoRepository.ListarPaginadoAsync(
+            busca,
+            pagina,
+            tamanhoPagina
+        );
+
+        var produtos = resultado.Produtos
+            .Select(MapToProdutoDto)
+            .ToList();
+
+        var totalPaginas = (int)Math.Ceiling(
+            resultado.TotalRegistros / (double)tamanhoPagina
+        );
+
+        return new ProdutoPaginadoDto(
+            produtos,
+            pagina,
+            tamanhoPagina,
+            resultado.TotalRegistros,
+            totalPaginas
+        );
     }
 
     public async Task<ProdutoDto> ObterProdutoPorIdAsync(int id)
@@ -119,7 +125,8 @@ public class ProdutoService : IProdutoService
             produto.Preco,
             produto.QuantidadeEmEstoque,
             produto.Ativo,
-            produto.FornecedorId
+            produto.FornecedorId,
+            produto.Fornecedor.Nome
         );
     }
 }

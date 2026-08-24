@@ -8,7 +8,15 @@ public interface IProdutoRepository
     Task<Produto?> BuscarPorSkuAsync(string sku);
     Task<IReadOnlyCollection<Produto>> BuscarPorNomeAsync(string nome);
     Task<IReadOnlyCollection<Produto>> BuscarPorFornecedorAsync(int fornecedorId);
+
     Task<IEnumerable<Produto?>> ListarTodosAsync();
+
+    Task<(IReadOnlyCollection<Produto> Produtos, int TotalRegistros)>
+       ListarPaginadoAsync(
+           string? busca,
+           int pagina,
+           int tamanhoPagina
+       );
 
     Task<Produto> AdicionarAsync(Produto produto);
     Task<Produto> AtualizarAsync(Produto produto);

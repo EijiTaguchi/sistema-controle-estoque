@@ -7,7 +7,7 @@ public interface IProdutoService
     Task<ProdutoDto> CriarProdutoAsync(CriarProdutoDto dto);
     Task<ProdutoDto> AtualizarProdutoAsync(AtualizarProdutoDto dto);
     Task<ProdutoDto> DesativarProdutoAsync(int id);
-    Task<IEnumerable<ProdutoDto>> ListarProdutoAsync();
+    Task<ProdutoPaginadoDto> ListarProdutosAsync(string? busca, int pagina, int tamanhoPagina);
     Task<ProdutoDto> ObterProdutoPorIdAsync(int id);
    
 }

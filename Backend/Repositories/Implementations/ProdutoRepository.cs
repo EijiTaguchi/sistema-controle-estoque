@@ -36,7 +36,9 @@ public class ProdutoRepository : IProdutoRepository
 
     public async Task<Produto?> BuscarPorIdAsync(int id)
     {
-        return await _context.Produtos.FindAsync(id);
+        return await _context.Produtos
+            .Include(p => p.Fornecedor)
+            .FirstOrDefaultAsync(p => p.Id == id);
     }
 
     public async Task<IReadOnlyCollection<Produto>> BuscarPorNomeAsync(string nome)
@@ -56,6 +58,34 @@ public class ProdutoRepository : IProdutoRepository
     {
         await _context.SaveChangesAsync();
         return produto;
+    }
+
+    public async Task<(IReadOnlyCollection<Produto> Produtos, int TotalRegistros)>
+    ListarPaginadoAsync(
+        string? busca,
+        int pagina,
+        int tamanhoPagina)
+    {
+        var query = _context.Produtos
+            .Include(p => p.Fornecedor)
+            .AsQueryable();
+
+        if (!string.IsNullOrWhiteSpace(busca))
+        {
+            query = query.Where(p =>
+                EF.Functions.Like(p.Nome, $"%{busca}%") ||
+                EF.Functions.Like(p.Sku, $"%{busca}%"));
+        }
+
+        var totalRegistros = await query.CountAsync();
+
+        var produtos = await query
+            .OrderBy(p => p.Nome)
+            .Skip((pagina - 1) * tamanhoPagina)
+            .Take(tamanhoPagina)
+            .ToListAsync();
+
+        return (produtos, totalRegistros);
     }
 
     public async Task<IEnumerable<Produto?>> ListarTodosAsync()

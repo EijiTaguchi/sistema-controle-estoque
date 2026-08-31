@@ -78,13 +78,6 @@ public class FornecedorService : IFornecedorService
         return MapearParaDto(fornecedorExistente);
     }
 
-    public async Task<IEnumerable<FornecedorDto>> ListarFornecedoresAsync()
-    {
-        var fornecedores = await _fornecedorRepository.ObterTodosAsync();
-
-        return fornecedores.Select(MapearParaDto);
-
-    }
 
     public async Task<FornecedorDto?> ObterFornecedorPorIdAsync(int id)
     {
@@ -107,4 +100,31 @@ public class FornecedorService : IFornecedorService
         );
     }
 
+    public async Task<FornecedorPaginaDoDto> ListarFornecedoresAsync(string? busca, int pagina, int tamanhoPagina)
+    {
+        if (pagina < 1)
+            pagina = 1;
+
+        if (tamanhoPagina < 10)
+            tamanhoPagina = 10;
+        if (tamanhoPagina > 100)
+            tamanhoPagina = 100;
+
+        var resultado = await _fornecedorRepository.ObterPaginadoAsync(busca, pagina, tamanhoPagina);
+
+        var fornecedores = resultado.Dados.Select(MapearParaDto).ToList();
+
+        var totalPaginas = (int)Math.Ceiling(
+            resultado.TotalRegistros / (double)tamanhoPagina
+        );
+
+        return new FornecedorPaginaDoDto(
+            fornecedores,
+            pagina,
+            tamanhoPagina,
+            resultado.TotalRegistros,
+            totalPaginas
+        );
+
+    }
 }

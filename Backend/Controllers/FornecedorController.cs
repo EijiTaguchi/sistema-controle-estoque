@@ -24,9 +24,16 @@ public class FornecedorController : ControllerBase
     }
 
     [HttpGet]
-    public async Task<IActionResult> MostrarTodosFornecedores()
+    public async Task<IActionResult> ListarFornecedores([FromQuery] string? busca, [FromQuery] int pagina = 1, [FromQuery] int tamanhoPagina = 10)
     {
-        var fornecedores = await _fornecedorService.ListarFornecedoresAsync();
+        var fornecedores = await _fornecedorService
+            .ListarFornecedoresAsync
+            (
+                busca,
+                pagina,
+                tamanhoPagina
+            );
+
         return Ok(fornecedores);
     }
 

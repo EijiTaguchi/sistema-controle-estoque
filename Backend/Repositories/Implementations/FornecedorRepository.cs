@@ -14,13 +14,6 @@ public class FornecedorRepository : IFornecedorRepository
         _context = context;
     }
 
-    public async Task<IEnumerable<Fornecedor>> ObterTodosAsync()
-    {
-        return await _context.Fornecedores
-            .AsNoTracking()
-            .ToListAsync();
-    }
-
     public async Task<Fornecedor?> ObterPorIdAsync(int id)
     {
         return await _context.Fornecedores
@@ -43,5 +36,28 @@ public class FornecedorRepository : IFornecedorRepository
     {
         _context.Fornecedores.Update(fornecedor);
         await _context.SaveChangesAsync();
+    }
+
+    public async Task<(IReadOnlyCollection<Fornecedor> Dados, int TotalRegistros)> ObterPaginadoAsync(string? busca, int pagina, int tamanhoPagina)
+    {
+        var query = _context.Fornecedores
+            .Include(p => p.Produtos)
+            .AsQueryable();
+
+        if (!string.IsNullOrWhiteSpace(busca))
+        {
+            query = query.Where(p =>
+                EF.Functions.Like(p.Nome, $"%{busca}%"));
+        }
+
+        var fornecedores = await query
+            .OrderBy(f => f.Nome)
+            .Skip((pagina - 1) * tamanhoPagina)
+            .Take(tamanhoPagina)
+            .ToListAsync();
+
+        var totalRegistros = await query.CountAsync();
+
+        return (fornecedores, totalRegistros);
     }
 }

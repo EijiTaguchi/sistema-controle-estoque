@@ -29,7 +29,7 @@ public class FornecedorConfiguration : IEntityTypeConfiguration<Fornecedor>
 
         builder.Property(f => f.Telefone)
             .IsRequired()
-            .HasMaxLength(11);
+            .HasMaxLength(15);
 
         builder.Property(f => f.Ativo)
             .IsRequired();
